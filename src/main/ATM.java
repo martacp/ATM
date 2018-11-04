@@ -21,15 +21,27 @@ public class ATM {
 			e.printStackTrace();
 		}
 
-		String name = "clemi", password = "123";
+		String name = "clemi", password = "123", from = "112233", to = "223344", currency = "RON";
+		int amount = 79;
+
 			User user = new User(name, password);
 
 			if(user.userExists()){
+				//logging in the user
+				user.setActiveUserAccount();
+				user.loggedIn();
+
+				//selecting all bank accounts of said user
+				AccountManager acc = new AccountManager(name);
+				acc.getAccounts();
+
+				Transaction transaction = new  Transaction(from, to, amount, currency);
+				transaction.addTransaction();
+
 				System.out.println("User data correct!");
 			}else{
 				System.out.println("User data incorrect!");
 			}
-
 
 	}
 }

@@ -1,12 +1,28 @@
 package main;
 
+import java.sql.Connection;
+import java.sql.Statement;
+import java.sql.ResultSet;
+
 public class Account {
 
 	private String IBAN;
+	private String name;
 	private int pin;
 	private String currency;
 	private int balance = 0;
 	private boolean isActive;
+
+	public Account(String name, String IBAN, int pin, String currency, int balance){
+		if(balance >= 0){
+			this.name = name;
+			this.IBAN = IBAN;
+			this.pin = pin;
+			this.currency = currency;
+			this.balance = balance;
+		}
+	}
+
 	public String getIBAN() {
 		return IBAN;
 	}
