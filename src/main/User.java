@@ -11,6 +11,7 @@ public class User {
 	private String password;
 	private boolean isActive;
 	private boolean isLoggedIn;
+	private int userID;
 	
 	public User(String name, String password) {
 		this.name = name;
@@ -24,8 +25,19 @@ public class User {
 			isActive = true;
 	}
 
-	public void login(){
+	public void loggedIn(){
+
+		DBConnect con = new DBConnect("root","", "atm");
+		ResultSet result;
 		isLoggedIn = true;
+		result = con.query(String.format("SELECT * FROM User WHERE Name = '%s'", name));
+		try {
+			while (result.next()) {
+				userID = result.getInt("UserID");
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 	}
 
 	public boolean userExists(){
@@ -36,7 +48,7 @@ public class User {
 		try {
 			if(result.next())
 				count = result.getInt("COUNT(*)");
-			System.out.println(count);
+				userID = result.getInt("UserID");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -56,6 +68,8 @@ public class User {
 		return password;
 	}
 
+	public int getID(){ return userID; }
+
 	public boolean isActive() {
 		return isActive;
 	}
@@ -71,5 +85,7 @@ public class User {
 	public void setActive(boolean isActive) {
 		this.isActive = isActive;
 	}
+
+	public void setID(int userid){ this.userID = userid;}
 
 }

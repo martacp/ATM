@@ -19,16 +19,6 @@ public class Transaction {
 		this.currency = currency;
 	}
 
-	public void addTransaction(){
-
-		DBConnect con = new DBConnect("root","", "atm");
-		//String sql = "insert into Transaction(FROM_IBAN, TO_IBAN, Currency, Amount) values(" + from + "," + to + "," + currency + "," + amount + ")";
-		String sql = "insert into Transaction(FROM_IBAN, TO_IBAN, Currency, Amount)" + " values(?,?,?,?)";
-		con.insert(sql, this.from, this.to, this.currency, this.amount);
-		//ResultSet result = con.query("insert into Transaction(FROM_IBAN, TO_IBAN, Currency, Amount) values(" + from + "," + to + "," + currency + "," + amount + ")");
-
-	}
-
 	public String getFrom() {
 		return from;
 	}

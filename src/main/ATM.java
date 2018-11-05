@@ -21,6 +21,7 @@ public class ATM {
 
 		String name = "clemi", password = "123", from = "112233", to = "223344", currency = "RON";
 		double amount = 79.0;
+		int userid;
 
 			User user = new User(name, password);
 
@@ -28,16 +29,15 @@ public class ATM {
 				//logging in the user
 				user.setActiveUserAccount();
 				user.loggedIn();
+				userid = user.getID();
 
 				//selecting all bank accounts of said user
 				AccountManager acc = new AccountManager(name);
 				acc.getAccounts();
 
-				//Transaction transaction = new  Transaction(from, to, amount, currency);
-				//transaction.addTransaction();
-
-				TransactionManager manager = new TransactionManager();
-				manager.showHistory();
+				TransactionManager transaction = new TransactionManager();
+				transaction.create(from, to, currency, amount, userid);
+				transaction.showHistory();
 
 				System.out.println("User data correct!");
 			}else{

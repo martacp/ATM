@@ -29,7 +29,7 @@ public class DBConnect {
 
 		}
 
-		public void insert(String s, String from, String to, String currency, double amount){
+		public void insert(String s, String from, String to, String currency, double amount, int userid){
 
 			try {
 				PreparedStatement preparedStmt = connection.prepareStatement(s);
@@ -37,6 +37,7 @@ public class DBConnect {
 				preparedStmt.setString (2, to);
 				preparedStmt.setString (3, currency);
 				preparedStmt.setDouble(4, amount);
+				preparedStmt.setInt(5, userid);
 
 				preparedStmt.execute();
 			} catch (Exception e) {
