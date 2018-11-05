@@ -5,8 +5,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.ResultSet;
 
-
-
 public class ATM {
 
 	public static void main(String[] args) {
@@ -35,8 +33,11 @@ public class ATM {
 				AccountManager acc = new AccountManager(name);
 				acc.getAccounts();
 
-				Transaction transaction = new  Transaction(from, to, amount, currency);
-				transaction.addTransaction();
+				//Transaction transaction = new  Transaction(from, to, amount, currency);
+				//transaction.addTransaction();
+
+				TransactionManager manager = new TransactionManager();
+				manager.showHistory();
 
 				System.out.println("User data correct!");
 			}else{
