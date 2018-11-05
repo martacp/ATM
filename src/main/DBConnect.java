@@ -1,9 +1,6 @@
 package main;
 
-import java.sql.Connection;
-import java.sql.Statement;
-import java.sql.ResultSet;
-import java.sql.DriverManager;
+import java.sql.*;
 
 public class DBConnect {
 
@@ -29,7 +26,23 @@ public class DBConnect {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
+
+		}
+
+		public void insert(String s, String from, String to, String currency, double amount){
+
+			try {
+				PreparedStatement preparedStmt = connection.prepareStatement(s);
+				preparedStmt.setString (1, from);
+				preparedStmt.setString (2, to);
+				preparedStmt.setString (3, currency);
+				preparedStmt.setDouble(4, amount);
+
+				preparedStmt.execute();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 
 	public ResultSet query(String query){
 

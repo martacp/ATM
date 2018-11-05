@@ -22,7 +22,7 @@ public class ATM {
 		}
 
 		String name = "clemi", password = "123", from = "112233", to = "223344", currency = "RON";
-		int amount = 79;
+		double amount = 79.0;
 
 			User user = new User(name, password);
 

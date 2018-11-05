@@ -1,14 +1,32 @@
 package main;
 
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.ResultSet;
+
 public class Transaction {
 
 	private String from;
 	private String to;
-	private int amount;
+	private double amount;
 	private String currency;
 	
-	public Transaction() {
-		// TODO Auto-generated constructor stub
+	public Transaction(String from, String to, double amount, String currency) {
+		this.from = from;
+		this.to = to;
+		this.amount = amount;
+		this.currency = currency;
+	}
+
+	public void addTransaction(){
+
+		DBConnect con = new DBConnect("root","", "atm");
+		//String sql = "insert into Transaction(FROM_IBAN, TO_IBAN, Currency, Amount) values(" + from + "," + to + "," + currency + "," + amount + ")";
+		String sql = "insert into Transaction(FROM_IBAN, TO_IBAN, Currency, Amount)" + " values(?,?,?,?)";
+		con.insert(sql, this.from, this.to, this.currency, this.amount);
+		//ResultSet result = con.query("insert into Transaction(FROM_IBAN, TO_IBAN, Currency, Amount) values(" + from + "," + to + "," + currency + "," + amount + ")");
+
 	}
 
 	public String getFrom() {
@@ -19,7 +37,7 @@ public class Transaction {
 		return to;
 	}
 
-	public int getAmount() {
+	public double getAmount() {
 		return amount;
 	}
 
