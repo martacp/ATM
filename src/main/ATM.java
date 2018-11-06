@@ -42,8 +42,7 @@ public class ATM {
 
 				TransactionManager transaction = new TransactionManager(userid);
 				//transaction.create(from, to, currency, amount, userid);
-				transaction.showHistory();
-
+				transaction.SetTransactions();
 				System.out.println("User data correct!");
 			}else{
 				System.out.println("User data incorrect!");

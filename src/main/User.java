@@ -12,8 +12,10 @@ public class User {
 	private boolean isActive;
 	private boolean isLoggedIn;
 	private int userID;
+	private DBUser connection;
 
 	public User() {
+		connection = new DBUser();
 		this.name = null;
 		this.password = null;
 		isLoggedIn = false;
@@ -21,6 +23,7 @@ public class User {
 	}
 
 	public User(String name, String password) {
+		connection = new DBUser();
 		this.name = name;
 		this.password = password;
 		isLoggedIn = false;
@@ -33,17 +36,16 @@ public class User {
 	}
 
 	public void deactivateUser(){
-		DBConnect con = new DBConnect("root","", "atm");
-		con.deactivateUser(userID);
+
+		connection.deactivateUser(userID);
 	}
 
 	public void loggedIn(){
 
-		DBConnect con = new DBConnect("root","", "atm");
 		ResultSet result;
 		isLoggedIn = true;
 		isActive = true;
-		result = con.query(String.format("SELECT * FROM User WHERE Name = '%s'", name));
+		result = connection.query(String.format("SELECT * FROM User WHERE Name = '%s'", name));
 		try {
 			while (result.next()) {
 				userID = result.getInt("UserID");
@@ -58,17 +60,15 @@ public class User {
 			this.name = name;
 			this.password = password;
 
-			DBConnect con = new DBConnect("root","","atm");
-			String sql = "INSERT INTO User(Name, Password, IsActive) VALUES(?,?,?)";
-			con.insertUser(sql, name, password);
+			connection.insertUser(name, password);
 		}
 	}
 
 	public boolean userExists(){
-		DBConnect con = new DBConnect("root","", "atm");
+
 		ResultSet result;
 		int count = 0;
-		result = con.query(String.format("SELECT COUNT(*) FROM User WHERE Name = '%s' AND Password = '%s'", name, password));
+		result = connection.query(String.format("SELECT COUNT(*) FROM User WHERE Name = '%s' AND Password = '%s'", name, password));
 		try {
 			if(result.next())
 				count = result.getInt("COUNT(*)");
