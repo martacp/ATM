@@ -10,25 +10,26 @@ public class TransactionManager {
     private String TO_IBAN;
     private String currency;
     private double amount;
+    private int userID;
     private ArrayList<Transaction> transactionHistory = new ArrayList<Transaction>(10);
 
 
-    public TransactionManager(){
-
+    public TransactionManager(int id){
+        userID = id;
     }
 
     public void create(String from, String to, String currency, double amount, int userid){
 
         DBConnect con = new DBConnect("root","", "atm");
         String sql = "insert into Transaction(FROM_IBAN, TO_IBAN, Currency, Amount, UserID)" + " values(?,?,?,?,?)";
-        con.insert(sql, from, to, currency, amount, userid);
+        con.insertTransaction(sql, from, to, currency, amount, userid);
 
     }
 
     public void showHistory(){
 
         DBConnect con = new DBConnect("root", "", "atm");
-        String query = "SELECT * FROM Transaction";
+        String query = "SELECT * FROM Transaction WHERE UserID = '" +  userID + "'";
         ResultSet result = con.query(query);
         try {
             while(result.next()){
@@ -41,13 +42,14 @@ public class TransactionManager {
                 transactionHistory.add(new Transaction(from, to, am, curr));
 
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
-
-        for(int i = 0 ; i < transactionHistory.size(); i++)
-            System.out.println( transactionHistory.get(i));
+        for(int i = 0 ; i < transactionHistory.size(); i++) {
+            //System.out.println("inside the for loop." + i);
+            transactionHistory.get(i).show();
+        }
     }
 
 }

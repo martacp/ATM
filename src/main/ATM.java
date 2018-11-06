@@ -20,8 +20,13 @@ public class ATM {
 		}
 
 		String name = "clemi", password = "123", from = "112233", to = "223344", currency = "RON";
-		double amount = 79.0;
+		String newUser = "ciac", newAccount = "887766", pass = "123", repass = "123";
+		double amount = 51.0;
 		int userid;
+
+			//User new_user = new User();
+			//new_user.createUser(newUser, pass, repass);
+
 
 			User user = new User(name, password);
 
@@ -35,8 +40,8 @@ public class ATM {
 				AccountManager acc = new AccountManager(name);
 				acc.getAccounts();
 
-				TransactionManager transaction = new TransactionManager();
-				transaction.create(from, to, currency, amount, userid);
+				TransactionManager transaction = new TransactionManager(userid);
+				//transaction.create(from, to, currency, amount, userid);
 				transaction.showHistory();
 
 				System.out.println("User data correct!");

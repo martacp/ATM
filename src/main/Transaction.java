@@ -19,6 +19,10 @@ public class Transaction {
 		this.currency = currency;
 	}
 
+	public void show(){
+		System.out.println(from + " " + to + " " + currency + " " + amount);
+	}
+
 	public String getFrom() {
 		return from;
 	}
