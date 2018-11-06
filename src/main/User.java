@@ -12,7 +12,14 @@ public class User {
 	private boolean isActive;
 	private boolean isLoggedIn;
 	private int userID;
-	
+
+	public User() {
+		this.name = null;
+		this.password = null;
+		isLoggedIn = false;
+		isActive = false;
+	}
+
 	public User(String name, String password) {
 		this.name = name;
 		this.password = password;
@@ -25,11 +32,17 @@ public class User {
 			isActive = true;
 	}
 
+	public void deactivateUser(){
+		DBConnect con = new DBConnect("root","", "atm");
+		con.deactivateUser(userID);
+	}
+
 	public void loggedIn(){
 
 		DBConnect con = new DBConnect("root","", "atm");
 		ResultSet result;
 		isLoggedIn = true;
+		isActive = true;
 		result = con.query(String.format("SELECT * FROM User WHERE Name = '%s'", name));
 		try {
 			while (result.next()) {
@@ -37,6 +50,17 @@ public class User {
 			}
 		}catch(Exception e){
 			e.printStackTrace();
+		}
+	}
+
+	public void createUser(String name, String password, String repassword){
+		if(password == repassword){
+			this.name = name;
+			this.password = password;
+
+			DBConnect con = new DBConnect("root","","atm");
+			String sql = "INSERT INTO User(Name, Password, IsActive) VALUES(?,?,?)";
+			con.insertUser(sql, name, password);
 		}
 	}
 
@@ -48,7 +72,6 @@ public class User {
 		try {
 			if(result.next())
 				count = result.getInt("COUNT(*)");
-				userID = result.getInt("UserID");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
