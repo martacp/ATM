@@ -10,7 +10,7 @@ public class DBTransaction extends DBConnect{
 
     public void insertTransaction(String from, String to, String currency, double amount, int userid){
 
-        String sql = "INSERT INTO Transaction(FROM_IBAN, TO_IBAN, Currency, Amount, UserID)" + " VALUES(?,?,?,?,?)";
+        String sql = "INSERT INTO Transaction(FROM_IBAN, TO_IBAN, Currency, Amount, UserID) VALUES(?,?,?,?,?)";
 
         try {
             PreparedStatement preparedStmt = Connection.prepareStatement(sql);
