@@ -1,58 +1,53 @@
 package main;
 
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.sql.ResultSet;
-
 public class Transaction {
 
-	private String from;
-	private String to;
-	private double amount;
-	private String currency;
+	private String From;
+	private String To;
+	private double Amount;
+	private String Currency;
 	
 	public Transaction(String from, String to, double amount, String currency) {
-		this.from = from;
-		this.to = to;
-		this.amount = amount;
-		this.currency = currency;
+		From = from;
+		To = to;
+		Amount = amount;
+		Currency = currency;
 	}
 
 	public void show(){
-		System.out.println(from + " " + to + " " + currency + " " + amount);
+		System.out.println(From + " " + To + " " + Currency + " " + Amount);
 	}
 
 	public String getFrom() {
-		return from;
+		return From;
 	}
 
 	public String getTo() {
-		return to;
+		return To;
 	}
 
 	public double getAmount() {
-		return amount;
+		return Amount;
 	}
 
 	public String getCurrency() {
-		return currency;
+		return Currency;
 	}
 
 	public void setFrom(String from) {
-		this.from = from;
+		From = from;
 	}
 
 	public void setTo(String to) {
-		this.to = to;
+		To = to;
 	}
 
 	public void setAmount(int amount) {
-		this.amount = amount;
+		Amount = amount;
 	}
 
 	public void setCurrency(String currency) {
-		this.currency = currency;
+		Currency = currency;
 	}
 
 }

@@ -1,74 +1,68 @@
 package main;
 
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.sql.ResultSet;
 
 public class User {
 
-	private String name;
-	private String password;
-	private boolean isActive;
-	private boolean isLoggedIn;
-	private int userID;
-	private DBUser connection;
+	private String Name;
+	private String Password;
+	private boolean IsActive;
+	private boolean IsLoggedIn;
+	private int UserID;
+	private DBUser Connection;
 
 	public User() {
-		connection = new DBUser();
-		this.name = null;
-		this.password = null;
-		isLoggedIn = false;
-		isActive = false;
+		Connection = new DBUser("root", "","atm");
+		Name = null;
+		Password = null;
+		IsLoggedIn = false;
+		IsActive = false;
 	}
 
 	public User(String name, String password) {
-		connection = new DBUser();
-		this.name = name;
-		this.password = password;
-		isLoggedIn = false;
-		isActive = false;
+		Connection = new DBUser("root","", "atm");
+		Name = name;
+		Password = password;
+		IsLoggedIn = false;
+		IsActive = false;
 	}
 
-	public void setActiveUserAccount(){
-		if(isActive == false)
-			isActive = true;
+	public void SetActiveUserAccount(){
+		if(IsActive == false)
+			IsActive = true;
 	}
 
-	public void deactivateUser(){
+	public void DeactivateUser(){ Connection.deactivateUser(UserID); }
 
-		connection.deactivateUser(userID);
-	}
-
-	public void loggedIn(){
+	public void LoggedIn(){
 
 		ResultSet result;
-		isLoggedIn = true;
-		isActive = true;
-		result = connection.query(String.format("SELECT * FROM User WHERE Name = '%s'", name));
+		IsLoggedIn = true;
+		IsActive = true;
+		result = Connection.query(String.format("SELECT * FROM User WHERE Name = '%s'", Name));
 		try {
 			while (result.next()) {
-				userID = result.getInt("UserID");
+				UserID = result.getInt("UserID");
 			}
 		}catch(Exception e){
 			e.printStackTrace();
 		}
 	}
 
-	public void createUser(String name, String password, String repassword){
+	public void CreateUser(String name, String password, String repassword){
 		if(password == repassword){
-			this.name = name;
-			this.password = password;
+			Name = name;
+			Password = password;
 
-			connection.insertUser(name, password);
+			Connection.insertUser(Name, Password);
 		}
 	}
 
-	public boolean userExists(){
+	public boolean UserExists(){
 
 		ResultSet result;
 		int count = 0;
-		result = connection.query(String.format("SELECT COUNT(*) FROM User WHERE Name = '%s' AND Password = '%s'", name, password));
+		result = Connection.query(String.format("SELECT COUNT(*) FROM User WHERE Name = '%s' AND Password = '%s'", Name, Password));
 		try {
 			if(result.next())
 				count = result.getInt("COUNT(*)");
@@ -83,32 +77,30 @@ public class User {
 			return false;
 	}
 
-	public String getName() {
-		return name;
-	}
+	public String getName() { return Name; }
 
 	public String getPassword() {
-		return password;
+		return Password;
 	}
 
-	public int getID(){ return userID; }
+	public int getUserID(){ return UserID; }
 
 	public boolean isActive() {
-		return isActive;
+		return IsActive;
 	}
 
 	public void setName(String name) {
-		this.name = name;
+		Name = name;
 	}
 
 	public void setPassword(String password) {
-		this.password = password;
+		Password = password;
 	}
 
 	public void setActive(boolean isActive) {
-		this.isActive = isActive;
+		IsActive = isActive;
 	}
 
-	public void setID(int userid){ this.userID = userid;}
+	public void setUserID(int userid){ UserID = userid;}
 
 }

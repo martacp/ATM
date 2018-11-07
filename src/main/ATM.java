@@ -1,8 +1,5 @@
 package main;
 
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.sql.ResultSet;
 
 public class ATM {
@@ -30,11 +27,11 @@ public class ATM {
 
 			User user = new User(name, password);
 
-			if(user.userExists()){
+			if(user.UserExists()){
 				//logging in the user
-				user.setActiveUserAccount();
-				user.loggedIn();
-				userid = user.getID();
+				user.SetActiveUserAccount();
+				user.LoggedIn();
+				userid = user.getUserID();
 
 				//selecting all bank accounts of said user
 				AccountManager acc = new AccountManager(name);

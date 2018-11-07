@@ -1,7 +1,6 @@
 package main;
 
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class TransactionManager {
@@ -13,7 +12,7 @@ public class TransactionManager {
     public TransactionManager(int userID){
         UserID = userID;
         Transactions = new ArrayList<Transaction>();
-        Connection = new DBTransaction();
+        Connection = new DBTransaction("root", "", "atm");
     }
 
     public void Create(String from, String to, String currency, double amount, int userid){
@@ -39,8 +38,9 @@ public class TransactionManager {
             e.printStackTrace();
         }
 
-        for(int i = 0; i < Transactions.size(); i++)
-            System.out.println(Transactions.get(i).show());
+        for(Transaction t : Transactions) {
+            t.show();
+        }
     }
 
 }

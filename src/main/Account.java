@@ -1,57 +1,53 @@
 package main;
 
-import java.sql.Connection;
-import java.sql.Statement;
-import java.sql.ResultSet;
-
 public class Account {
 
-	private String IBAN;
-	private String name;
-	private int pin;
-	private String currency;
-	private int balance = 0;
-	private boolean isActive;
+	private String Iban;
+	private String Name;
+	private int Pin;
+	private String Currency;
+	private double Balance = 0;
+	private boolean IsActive;
 
-	public Account(String name, String IBAN, int pin, String currency, int balance){
+	public Account(String name, String iban, int pin, String currency, double balance){
 		if(balance >= 0){
-			this.name = name;
-			this.IBAN = IBAN;
-			this.pin = pin;
-			this.currency = currency;
-			this.balance = balance;
+			Name = name;
+			Iban = iban;
+			Pin = pin;
+			Currency = currency;
+			Balance = balance;
 		}
 	}
 
-	public String getIBAN() {
-		return IBAN;
+	public void show(){
+		System.out.println( Name + " " + Iban + " " + Pin + " " + Currency + " " + Balance);
 	}
+
+	public String getIban() { return Iban; }
 	public int getPin() {
-		return pin;
+		return Pin;
 	}
 	public String getCurrency() {
-		return currency;
+		return Currency;
 	}
-	public int getBalance() {
-		return balance;
+	public double getBalance() {
+		return Balance;
 	}
-	public boolean isActive() {
-		return isActive;
-	}
-	public void setIBAN(String iBAN) {
-		IBAN = iBAN;
+	public boolean isActive() { return IsActive; }
+	public void setIban(String iban) {
+		Iban= iban;
 	}
 	public void setPin(int pin) {
-		this.pin = pin;
+		Pin = pin;
 	}
 	public void setCurrency(String currency) {
-		this.currency = currency;
+		Currency = currency;
 	}
 	public void setBalance(int balance) {
-		this.balance = balance;
+		Balance = balance;
 	}
 	public void setActive(boolean isActive) {
-		this.isActive = isActive;
+		IsActive = isActive;
 	}
 
 }

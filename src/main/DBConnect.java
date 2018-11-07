@@ -1,26 +1,29 @@
 package main;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 public class DBConnect {
 
 	public DBConnect() {
-		connection = null;
-		statement = null;
-		resultSet = null;
-		username = null;
-		password = null;
-		connectionPath = null;
+		Connection = null;
+		Statement = null;
+		ResultSet = null;
+		Username = null;
+		Password = null;
+		ConnectionPath = null;
 	}
 
 	public DBConnect(String username, String password, String connectionPath){
 
-		this.username = username;
-		this.password = password;
-		this.connectionPath = connectionPath;
+		this.Username = username;
+		this.Password = password;
+		this.ConnectionPath = connectionPath;
 
 		try {
-			this.connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/" + connectionPath,
+			this.Connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/" + connectionPath,
 														  username,
 					                                      password);
 		} catch (Exception e) {
@@ -33,18 +36,18 @@ public class DBConnect {
 	public ResultSet query(String query){
 
 		try {
-			statement = connection.createStatement();
-			resultSet = statement.executeQuery(query);
+			Statement = Connection.createStatement();
+			ResultSet = Statement.executeQuery(query);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return resultSet;
+		return ResultSet;
 	}
 
-	protected Connection connection;
-	private Statement statement;
-	private ResultSet resultSet;
-	private String username;
-	private String password;
-	private String connectionPath;
+	protected Connection Connection;
+	protected Statement Statement;
+	protected ResultSet ResultSet;
+	protected String Username;
+	protected String Password;
+	protected String ConnectionPath;
 }

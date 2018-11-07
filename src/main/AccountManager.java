@@ -1,39 +1,40 @@
 package main;
 
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 public class AccountManager {
 
-    private String name;
+    private String Name;
+    private DBConnect Connection;
+    private ArrayList<Account> Accounts;
 
     public AccountManager(String name){
-        this.name = name;
+
+        Connection = new DBConnect("root", "","atm");
+        Name = name;
+        Accounts = new ArrayList<Account>(10);
     }
 
     public void getAccounts(){
 
-        DBConnect con = new DBConnect("root","", "atm");
-        ResultSet result = con.query(String.format("select * from Account " +
-                "inner join User on User.UserID = Account.UserID " +
-                "where User.Name = '%s';", name));
-        String iban, currency;
-        int balance;
+        ResultSet result = Connection.query(String.format("SELECT * FROM Account " +
+                                     "INNER JOIN User ON User.UserID = Account.UserID " +
+                                     "WHERE User.Name = '%s';", Name));
         try {
             while(result.next()){
 
-                iban = result.getString("IBAN");
-                currency = result.getString("currency");
-                balance = result.getInt("balance");
-
-                System.out.println("IBAN: " + iban);
-                System.out.println("Currency: " + currency);
-                System.out.println("Balance: " + balance + " " + currency);
+                Accounts.add(new Account( Name,
+                                          result.getString("IBAN"),
+                                          result.getInt("PIN"),
+                                          result.getString("Currency"),
+                                          result.getDouble("Balance")));
             }
         }catch (Exception e) {
             e.printStackTrace();
         }
+
+        for(Account acc:Accounts)
+            acc.show();
     }
 }
