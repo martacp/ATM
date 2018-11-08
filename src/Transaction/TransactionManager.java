@@ -1,4 +1,7 @@
-package main;
+package Transaction;
+
+import Database.DBTransaction;
+import Transaction.Transaction;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;

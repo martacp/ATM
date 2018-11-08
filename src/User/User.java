@@ -1,4 +1,6 @@
-package main;
+package User;
+
+import Database.DBUser;
 
 import java.sql.ResultSet;
 
