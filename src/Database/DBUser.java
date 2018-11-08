@@ -1,4 +1,6 @@
-package main;
+package Database;
+
+import Database.DBConnect;
 
 import java.sql.PreparedStatement;
 

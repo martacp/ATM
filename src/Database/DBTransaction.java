@@ -1,8 +1,10 @@
-package main;
+package Database;
+
+import Database.DBConnect;
 
 import java.sql.PreparedStatement;
 
-public class DBTransaction extends DBConnect{
+public class DBTransaction extends DBConnect {
 
     public DBTransaction(String username, String password, String connectionPath){
         super(username, password, connectionPath);

@@ -1,4 +1,9 @@
-package main;
+package Main;
+
+import Account.AccountManager;
+import Database.DBConnect;
+import Transaction.TransactionManager;
+import User.User;
 
 import java.sql.ResultSet;
 
