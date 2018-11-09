@@ -8,31 +8,42 @@ public class Login {
 
     private DBConnect Connection;
     private boolean LoggedIn;
+    private ResultSet Result;
+    private String Name;
+    private String Password;
+    private int UserID;
 
     public Login(String name, String password) {
         Connection = new DBConnect("root", "", "atm");
 
-        ResultSet result;
         int count = 0;
         try {
-            result = Connection.query(String.format("SELECT COUNT(*) FROM User WHERE Name = '%s' AND Password = '%s'", name, password));
-            count = result.getInt("COUNT(*)");
+            Result = Connection.query(String.format("SELECT COUNT(*) FROM User WHERE Name = '%s' AND Password = '%s'", name, password));
+            while(Result.next())
+                count = Result.getInt("COUNT(*)");
         }catch(Exception e){
             e.printStackTrace();
         }
 
         if(count == 1){
             LoggedIn = true;
+            Name = name;
+            Password = password;
+            try {
+                Result = Connection.query(String.format("SELECT UserID FROM User WHERE Name = '%s' AND Password = '%s'", Name, Password));
+                while(Result.next())
+                    UserID = Result.getInt("UserID");
+            }catch(Exception e){
+                e.getStackTrace();
+            }
         }else{
             LoggedIn = false;
         }
     }
 
-    public boolean GetLoggedIn(){
-        return LoggedIn;
-    }
+    public int GetUserID(){ return UserID; }
 
-    public void SetLoggedIn(boolean loggedIn){
-        LoggedIn = loggedIn;
-    }
+    public boolean GetLoggedIn(){ return LoggedIn; }
+
+    public void SetLoggedIn(boolean loggedIn){ LoggedIn = loggedIn; }
 }

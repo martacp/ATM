@@ -1,9 +1,5 @@
 package Database;
 
-import Database.DBConnect;
-
-import java.sql.PreparedStatement;
-
 public class DBUser extends DBConnect {
 
     public DBUser(String username, String password, String connectionPath){
@@ -16,12 +12,12 @@ public class DBUser extends DBConnect {
         boolean isActive = true;
         String sql = "INSERT INTO User(Name, Password, IsActive) VALUES(?,?,?)";
         try {
-            PreparedStatement preparedStmt = Connection.prepareStatement(sql);
-            preparedStmt.setString (1, name);
-            preparedStmt.setString (2, password);
-            preparedStmt.setBoolean (3, isActive);
+            PrepStmt = Connection.prepareStatement(sql);
+            PrepStmt.setString (1, name);
+            PrepStmt.setString (2, password);
+            PrepStmt.setBoolean (3, isActive);
 
-            preparedStmt.execute();
+            PrepStmt.execute();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -31,9 +27,9 @@ public class DBUser extends DBConnect {
         try{
             boolean isActive = false;
             String sql = "UPDATE User SET isActive = ? WHERE UserID = ?";
-            PreparedStatement prepStmt = Connection.prepareStatement(sql);
-            prepStmt.setBoolean(1, isActive);
-            prepStmt.setInt(1, id);
+            PrepStmt = Connection.prepareStatement(sql);
+            PrepStmt.setBoolean(1, isActive);
+            PrepStmt.setInt(1, id);
         }catch(Exception e){
             e.printStackTrace();
         }
