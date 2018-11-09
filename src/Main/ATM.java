@@ -12,7 +12,7 @@ public class ATM {
 	public static void main(String[] args) {
 		ResultSet result;
 		DBConnect con = new DBConnect("root","", "atm");
-		result = con.query("SELECT * FROM User");
+		result = con.Query("SELECT * FROM User");
 		try {
 			while(result.next()){
                 System.out.println(result.getString("name"));

@@ -23,7 +23,7 @@ public class AccountManager {
 
     public void GetAccounts(){
 
-        ResultSet result = Connection.query(String.format("SELECT * FROM Account " +
+        ResultSet result = Connection.Query(String.format("SELECT * FROM Account " +
                                      "INNER JOIN User ON User.UserID = Account.UserID " +
                                      "WHERE User.Name = '%s';", Name));
         try {

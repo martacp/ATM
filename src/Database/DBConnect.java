@@ -34,7 +34,7 @@ public class DBConnect {
 	}
 
 
-	public ResultSet query(String query){
+	public ResultSet Query(String query){
 
 		try {
 			Statement = Connection.createStatement();

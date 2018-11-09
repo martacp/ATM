@@ -18,7 +18,7 @@ public class Login {
 
         int count = 0;
         try {
-            Result = Connection.query(String.format("SELECT COUNT(*) FROM User WHERE Name = '%s' AND Password = '%s'", name, password));
+            Result = Connection.Query(String.format("SELECT COUNT(*) FROM User WHERE Name = '%s' AND Password = '%s'", name, password));
             while(Result.next())
                 count = Result.getInt("COUNT(*)");
         }catch(Exception e){
@@ -30,7 +30,7 @@ public class Login {
             Name = name;
             Password = password;
             try {
-                Result = Connection.query(String.format("SELECT UserID FROM User WHERE Name = '%s' AND Password = '%s'", Name, Password));
+                Result = Connection.Query(String.format("SELECT UserID FROM User WHERE Name = '%s' AND Password = '%s'", Name, Password));
                 while(Result.next())
                     UserID = Result.getInt("UserID");
             }catch(Exception e){

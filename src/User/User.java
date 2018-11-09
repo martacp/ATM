@@ -1,9 +1,5 @@
 package User;
 
-import Database.DBUser;
-
-import java.sql.ResultSet;
-
 public class User {
 
 	private String Name;
