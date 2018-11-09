@@ -46,7 +46,7 @@ public class AccountManager {
     public void CreateAccount(int userid, int pin, String currency, double balance){
 
         String iban = IbanGenerator();
-        Connection.insert(userid, iban, pin, currency, balance);
+        Connection.Insert(userid, iban, pin, currency, balance);
     }
 
     public String IbanGenerator(){

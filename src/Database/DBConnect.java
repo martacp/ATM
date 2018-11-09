@@ -51,5 +51,6 @@ public class DBConnect {
 	protected String Username;
 	protected String Password;
 	protected String ConnectionPath;
+	protected String Sql;
 	protected PreparedStatement PrepStmt;
 }

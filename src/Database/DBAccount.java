@@ -8,11 +8,11 @@ public class DBAccount extends DBConnect {
         super(username, password, connectionPath);
     }
 
-    public void insert(int userId, String iban, int pin, String currency, double balance){
-        String sql = "INSERT INTO Account(IBAN, PIN, Currency, Balance, IsActive, UserID) VALUES(?, ?, ?, ?, ?, ?)";
+    public void Insert(int userId, String iban, int pin, String currency, double balance){
+        Sql = "INSERT INTO Account(IBAN, PIN, Currency, Balance, IsActive, UserID) VALUES(?, ?, ?, ?, ?, ?)";
         boolean isActive = true;
         try {
-            PrepStmt = Connection.prepareStatement(sql);
+            PrepStmt = Connection.prepareStatement(Sql);
             PrepStmt.setString(1, iban);
             PrepStmt.setInt(2, pin);
             PrepStmt.setString(3, currency);
@@ -23,6 +23,19 @@ public class DBAccount extends DBConnect {
 
         }catch(Exception e){
             e.printStackTrace();
+        }
+    }
+
+    public void Update(int userId, int pin, String currency, double balance){
+        Sql = "UPDATE Account SET PIN = ?, Currency = ?, Balance = ? WHERE UserID = ? ";
+        try{
+            PrepStmt.setInt(1, pin);
+            PrepStmt.setString(2, currency);
+            PrepStmt.setDouble(3, balance);
+            PrepStmt.setInt(4, userId);
+            PrepStmt.execute();
+        }catch(Exception e){
+            e.getStackTrace();
         }
     }
 }

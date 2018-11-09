@@ -19,7 +19,7 @@ public class TransactionManager {
     }
 
     public void Create(String from, String to, String currency, double amount, int userid){
-        Connection.insert(from, to, currency, amount, userid);
+        Connection.Insert(from, to, currency, amount, userid);
     }
 
     public ArrayList<Transaction> GetTransanctions(){
