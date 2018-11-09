@@ -11,7 +11,7 @@ public class DBUser extends DBConnect {
     }
 
 
-    public void insertUser(String name, String password){
+    public void insert(String name, String password){
 
         boolean isActive = true;
         String sql = "INSERT INTO User(Name, Password, IsActive) VALUES(?,?,?)";
@@ -27,7 +27,7 @@ public class DBUser extends DBConnect {
         }
     }
 
-    public void deactivateUser(int id){
+    public void update(int id){
         try{
             boolean isActive = false;
             String sql = "UPDATE User SET isActive = ? WHERE UserID = ?";
