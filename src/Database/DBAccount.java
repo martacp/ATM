@@ -1,7 +1,5 @@
 package Database;
 
-import java.sql.PreparedStatement;
-
 public class DBAccount extends DBConnect {
 
     public DBAccount(String username, String password, String connectionPath){
@@ -29,10 +27,22 @@ public class DBAccount extends DBConnect {
     public void Update(int userId, int pin, String currency, double balance){
         Sql = "UPDATE Account SET PIN = ?, Currency = ?, Balance = ? WHERE UserID = ? ";
         try{
+            PrepStmt = Connection.prepareStatement(Sql);
             PrepStmt.setInt(1, pin);
             PrepStmt.setString(2, currency);
             PrepStmt.setDouble(3, balance);
             PrepStmt.setInt(4, userId);
+            PrepStmt.execute();
+        }catch(Exception e){
+            e.getStackTrace();
+        }
+    }
+
+    public void Delete(String iban){
+        Sql = "DELETE FROM Account WHERE IBAN = ?";
+        try{
+            PrepStmt = Connection.prepareStatement(Sql);
+            PrepStmt.setString(1, iban);
             PrepStmt.execute();
         }catch(Exception e){
             e.getStackTrace();

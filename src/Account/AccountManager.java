@@ -43,6 +43,10 @@ public class AccountManager {
          //   acc.show();
     }
 
+    public void DeleteAccount(String iban){
+        Connection.Delete(iban);
+    }
+
     public void CreateAccount(int userid, int pin, String currency, double balance){
 
         String iban = IbanGenerator();
