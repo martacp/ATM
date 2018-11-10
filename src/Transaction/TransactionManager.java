@@ -19,7 +19,7 @@ public class TransactionManager {
     }
 
     public void Create(String from, String to, String currency, double amount, int userid){
-        Connection.insertTransaction(from, to, currency, amount, userid);
+        Connection.Insert(from, to, currency, amount, userid);
     }
 
     public ArrayList<Transaction> GetTransanctions(){
@@ -28,7 +28,7 @@ public class TransactionManager {
 
     public void SetTransactions(){
         String query = "SELECT * FROM Transaction WHERE UserID = '" +  UserID + "'";
-        ResultSet result = Connection.query(query);
+        ResultSet result = Connection.Query(query);
         try {
             while(result.next()){
                Transactions.add(new Transaction(result.getString("FROM_IBAN"),

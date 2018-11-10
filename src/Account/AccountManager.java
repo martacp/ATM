@@ -1,27 +1,29 @@
 package Account;
 
 import Account.Account;
-import Database.DBConnect;
+import Database.DBAccount;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class AccountManager {
 
     private String Name;
-    private DBConnect Connection;
+    private DBAccount Connection;
     private ArrayList<Account> Accounts;
 
     public AccountManager(String name){
 
-        Connection = new DBConnect("root", "","atm");
+        Connection = new DBAccount("root", "","atm");
         Name = name;
         Accounts = new ArrayList<Account>(10);
+
     }
 
-    public void getAccounts(){
+    public void GetAccounts(){
 
-        ResultSet result = Connection.query(String.format("SELECT * FROM Account " +
+        ResultSet result = Connection.Query(String.format("SELECT * FROM Account " +
                                      "INNER JOIN User ON User.UserID = Account.UserID " +
                                      "WHERE User.Name = '%s';", Name));
         try {
@@ -37,7 +39,28 @@ public class AccountManager {
             e.printStackTrace();
         }
 
-        for(Account acc:Accounts)
-            acc.show();
+       // for(Account acc:Accounts)
+         //   acc.show();
+    }
+
+    public void CreateAccount(int userid, int pin, String currency, double balance){
+
+        String iban = IbanGenerator();
+        Connection.Insert(userid, iban, pin, currency, balance);
+    }
+
+    public String IbanGenerator(){
+        String iban = "";
+        int iban_size = 6;
+        int current_number = 0;
+        Random rand = new Random();
+
+        while(--iban_size >= 0)
+        {
+            current_number = rand.nextInt(10);
+            iban += current_number;
+        }
+        System.out.println(iban);
+        return iban;
     }
 }

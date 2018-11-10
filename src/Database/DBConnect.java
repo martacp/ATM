@@ -1,9 +1,10 @@
 package Database;
 
-import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 
 public class DBConnect {
 
@@ -33,7 +34,7 @@ public class DBConnect {
 	}
 
 
-	public ResultSet query(String query){
+	public ResultSet Query(String query){
 
 		try {
 			Statement = Connection.createStatement();
@@ -50,4 +51,6 @@ public class DBConnect {
 	protected String Username;
 	protected String Password;
 	protected String ConnectionPath;
+	protected String Sql;
+	protected PreparedStatement PrepStmt;
 }

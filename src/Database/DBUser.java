@@ -1,7 +1,5 @@
 package Database;
 
-import Database.DBConnect;
-
 import java.sql.PreparedStatement;
 
 public class DBUser extends DBConnect {
@@ -11,29 +9,30 @@ public class DBUser extends DBConnect {
     }
 
 
-    public void insertUser(String name, String password){
+    public void Insert(String name, String password){
 
         boolean isActive = true;
         String sql = "INSERT INTO User(Name, Password, IsActive) VALUES(?,?,?)";
         try {
-            PreparedStatement preparedStmt = Connection.prepareStatement(sql);
-            preparedStmt.setString (1, name);
-            preparedStmt.setString (2, password);
-            preparedStmt.setBoolean (3, isActive);
+            PrepStmt = Connection.prepareStatement(sql);
+            PrepStmt.setString (1, name);
+            PrepStmt.setString (2, password);
+            PrepStmt.setBoolean (3, isActive);
 
-            preparedStmt.execute();
+            PrepStmt.execute();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void deactivateUser(int id){
+    public void Update(int userid, String name, String password){
         try{
-            boolean isActive = false;
-            String sql = "UPDATE User SET isActive = ? WHERE UserID = ?";
-            PreparedStatement prepStmt = Connection.prepareStatement(sql);
-            prepStmt.setBoolean(1, isActive);
-            prepStmt.setInt(1, id);
+            String sql = "UPDATE User SET Name = ?, Password = ? WHERE UserID = ?";
+            PrepStmt = Connection.prepareStatement(sql);
+            PrepStmt.setString(1, name);
+            PrepStmt.setString(2, password);
+            PrepStmt.setInt(3, userid);
+            PrepStmt.execute();
         }catch(Exception e){
             e.printStackTrace();
         }
