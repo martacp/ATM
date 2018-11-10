@@ -18,9 +18,11 @@ public class Login {
 
         int count = 0;
         try {
-            Result = Connection.Query(String.format("SELECT COUNT(*) FROM User WHERE Name = '%s' AND Password = '%s'", name, password));
-            while(Result.next())
+            Result = Connection.Query(String.format("SELECT COUNT(*), UserID FROM User WHERE Name = '%s' AND Password = '%s'", name, password));
+            while(Result.next()) {
                 count = Result.getInt("COUNT(*)");
+                UserID = Result.getInt("UserID");
+            }
         }catch(Exception e){
             e.printStackTrace();
         }
@@ -29,15 +31,9 @@ public class Login {
             LoggedIn = true;
             Name = name;
             Password = password;
-            try {
-                Result = Connection.Query(String.format("SELECT UserID FROM User WHERE Name = '%s' AND Password = '%s'", Name, Password));
-                while(Result.next())
-                    UserID = Result.getInt("UserID");
-            }catch(Exception e){
-                e.getStackTrace();
-            }
         }else{
             LoggedIn = false;
+            UserID = 0;
         }
     }
 
